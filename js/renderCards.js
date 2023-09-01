@@ -1,13 +1,22 @@
+import { getVideo } from "./services.js";
+
 const listCard = document.querySelector('.other-films__list')
 
 const renderCards = (data) => {
     listCard.textContent = '';
 
-    const cards = data.map((item) => {
+    Promise.all(data.map(async (item) => {
+
+        const video = await getVideo(item.id, item.media_type);
+        const key = video.results[0]?.key;
+        console.log(key);
+
         const card = document.createElement('li');
         card.className = 'other-films__item';
 
         const link = document.createElement('a');
+        if (key) link.href = `https://youtu.be/${key}`;
+
         link.className = 'other-films__link';
         link.dataset.rating = item.vote_average;
 
@@ -19,9 +28,7 @@ const renderCards = (data) => {
         link.append(img);
         card.append(link);
         return card;
-    });
-
-    listCard.append(...cards);
+    })).then(cards => listCard.append(...cards));
 };
 
 export default renderCards;
