@@ -1,10 +1,9 @@
 import { getTrends } from "./services.js";
+import renderCards from "./renderCards.js";
 
 const filmWeek = document.querySelector('.film-week');
 
 const firstRender = data => {
-    console.log('data: ', data);
-
     filmWeek.innerHTML = `
         <div class="container film-week__container" data-rating="${data.vote_average}">
             <div class="film-week__poster-wrapper">
@@ -23,8 +22,14 @@ const firstRender = data => {
 
 const renderVideo = async () => {
     const data = await getTrends();
-    firstRender(data.results[0]);
+    const [firstCard, ...otherCards] = data.results;
+    otherCards.length = 12;
+    firstRender(firstCard);
+    renderCards(otherCards);
+    console.log('otherCards: ', otherCards);
 };
+
+export default renderVideo;
 /*
 adult: false
 backdrop_path: "/35z8hWuzfFUZQaYog8E9LsXW3iI.jpg"
@@ -42,4 +47,3 @@ video: false
 vote_average: 6.662
 vote_count: 1143
 */
-export default renderVideo;
