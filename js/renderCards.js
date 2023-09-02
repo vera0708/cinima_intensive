@@ -1,6 +1,6 @@
 import { getVideo } from "./services.js";
 
-const listCard = document.querySelector('.other-films__list')
+const listCard = document.querySelector('.other-films__list');
 
 const renderCards = (data) => {
     listCard.textContent = '';
@@ -23,7 +23,9 @@ const renderCards = (data) => {
         const img = document.createElement('img');
         img.className = 'other-films__img';
         img.alt = `постер ${item.title || item.name}`;
-        img.src = `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${item.poster_path}`;
+        img.src = item.poster_path
+            ? `https://www.themoviedb.org/t/p/w600_and_h900_bestv2/${item.poster_path}`
+            : 'img/no_poster.jpg';
 
         link.append(img);
         card.append(link);

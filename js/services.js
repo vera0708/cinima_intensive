@@ -25,6 +25,8 @@ export const getTrends = async (type = 'all', period = 'week', page = 3) => {
         console.log('data: ', data); */
 };
 
+// 'https://api.themoviedb.org/3/trending/movie/day?language=en-US' 
+
 export const getTop = async (type, page = 1) => {
     const url = `${BASE_URL}${type}/top_rated?api_key=${API_KEY}${LANGUAGE}&page=${page}`;
     return await getData(url);
@@ -39,3 +41,9 @@ export const getVideo = async (id, type) => {
     const url = `${BASE_URL}${type}/${id}/videos?api_key=${API_KEY}`
     return await getData(url);
 };
+
+export const search = async (query, page = 1) => {
+    const url = `${BASE_URL}search/multi?api_key=${API_KEY}${LANGUAGE}&page=${page}&include_adult=false&query=${query}`;
+    // 'https://api.themoviedb.org/3/search/multi?include_adult=false&language=en-US&page=1';
+    return await getData(url);
+}
