@@ -3,7 +3,8 @@ import renderCards from "./renderCards.js";
 
 const filmWeek = document.querySelector('.film-week');
 
-const firstRender = (data, { key }) => {
+const firstRender = (data, keyVideo) => {
+    const key = keyVideo?.key;
     const {
         vote_average: voteAverage,
         title,
@@ -41,7 +42,7 @@ const renderVideo = async () => {
 
     firstRender(firstCard, video.results[0]);
     renderCards(otherCards);
-    console.log('otherCards: ', otherCards);
+    // console.log('otherCards: ', otherCards);
 };
 
 export default renderVideo;

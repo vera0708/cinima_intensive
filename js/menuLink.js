@@ -17,12 +17,22 @@ const menuLink = () => {
 
                 if (target.classList.contains('get-nav__link_popular-movies')) {
                     getPopular('movie')
-                        .then(data => renderCards(data.results));
+                        .then(data => renderCards(data.results, 'movie'));
+                };
+
+                if (target.classList.contains('get-nav__link_popular-tv')) {
+                    getPopular('tv')
+                        .then(data => renderCards(data.results, 'tv'));
+                };
+
+                if (target.classList.contains('get-nav__link_top-movies')) {
+                    getTop('movie')
+                        .then(data => renderCards(data.results, 'movie'));
                 };
 
                 if (target.classList.contains('get-nav__link_top-tv')) {
                     getTop('tv')
-                        .then(data => renderCards(data.results));
+                        .then(data => renderCards(data.results, 'tv'));
                 };
             }
         });

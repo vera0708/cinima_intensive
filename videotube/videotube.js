@@ -2,12 +2,12 @@
 	const throttle = (type, name, obj) => {
 		obj = obj || window;
 		let running = false;
-		const func = function() {
+		const func = function () {
 			if (running) {
 				return;
 			}
 			running = true;
-			requestAnimationFrame(function() {
+			requestAnimationFrame(function () {
 				obj.dispatchEvent(new CustomEvent(name));
 				running = false;
 			});
@@ -20,7 +20,7 @@
 
 ((obj) => {
 	obj = obj || window;
-	obj.animation = function(elem, prop, cb) {
+	obj.animation = function (elem, prop, cb) {
 		const count = prop.count;
 		let counter = 0
 		if (prop.start) {
@@ -35,7 +35,7 @@
 			const max = Math.max(from, to);
 			const min = Math.min(from, to);
 			const step = (max - min) / count;
-			allAnimation.push({style, from, to, step, reverse: min === to})
+			allAnimation.push({ style, from, to, step, reverse: min === to })
 		});
 
 
@@ -125,10 +125,10 @@ const init = () => {
 	const closeVideoTubeModal = () => {
 
 		animation(overlay, {
-				end: [['display', 'none']],
-				anim: [['opacity', 1, 0]],
-				count: 20,
-			},
+			end: [['display', 'none']],
+			anim: [['opacity', 1, 0]],
+			count: 20,
+		},
 			() => {
 				overlay.textContent = "";
 			}
@@ -145,25 +145,25 @@ const init = () => {
 
 
 	const openVideoTubeModal = e => {
-			const target = e.target.closest('.tube');
-			if (!target) return;
+		const target = e.target.closest('.tube');
+		if (!target) return;
 
-			const href = target.href;
-			const search = href.includes('youtube');
-			let idVideo = search ? href.match(/(\?|&)v=([^&]+)/)[2] : href.match(/(\.be\/)([^&]+)/)[2];
+		const href = target.href;
+		const search = href.includes('youtube');
+		let idVideo = search ? href.match(/(\?|&)v=([^&]+)/)[2] : href.match(/(\.be\/)([^&]+)/)[2];
 
-			if (idVideo.length === 0) return;
+		if (idVideo.length === 0) return;
 
-			e.preventDefault();
+		e.preventDefault();
 
-			animation(overlay, {
-					start: [['display', 'block']],
-					anim: [['opacity', 0, 1]],
-					count: 20,
-				}
-			);
+		animation(overlay, {
+			start: [['display', 'block']],
+			anim: [['opacity', 0, 1]],
+			count: 20,
+		}
+		);
 
-			overlay.insertAdjacentHTML('beforeend', `
+		overlay.insertAdjacentHTML('beforeend', `
 			<div id="videotube-modal-loading">Загрузка...</div>
 			<div id="videotube-modal-close">&#10006;</div>
 			<div id="videotube-modal-container">
@@ -176,13 +176,13 @@ const init = () => {
 			</div>
 		`)
 
-			sizeVideo();
-			sizeContainer();
+		sizeVideo();
+		sizeContainer();
 
-			window.addEventListener("optimizedResize", sizeVideoTubeModal);
-			document.addEventListener('keyup', closeContainerEsc);
-		}
-	;
+		window.addEventListener("optimizedResize", sizeVideoTubeModal);
+		document.addEventListener('keyup', closeContainerEsc);
+	}
+		;
 
 
 	overlay.addEventListener("click", closeVideoTubeModal);
